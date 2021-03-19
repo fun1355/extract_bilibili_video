@@ -71,6 +71,7 @@ def extracVideo(partPath, outputPath):
     oldVideoPath = fileRealPath / "video.m4s"
     newAudioPath = fileRealPath / "audio.mp3"
     newVideoPath = fileRealPath / "video.mp4"
+
     if os.path.exists(oldAudioPath):
         os.rename(oldAudioPath, newAudioPath)
     if os.path.exists(oldVideoPath):
@@ -91,6 +92,7 @@ else: # "posix"
     rootPath = Path(os.getcwd()) / "resource_linux"
     outputPath = Path(os.getcwd()) / "output_linux"
 
+
 for videoPath in os.listdir(rootPath):
     videoPath = rootPath / videoPath
     parts = os.listdir(videoPath)
@@ -104,3 +106,4 @@ for videoPath in os.listdir(rootPath):
     for partPath in parts:
         partPath = videoPath / partPath;
         extracVideo(partPath, videoOutputPath)
+
