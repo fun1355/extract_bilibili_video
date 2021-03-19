@@ -698,6 +698,8 @@ def ConvertType2(row, height, bottomReserved):
 
 
 def ConvertToFile(filename_or_file, *args, **kwargs):
+    filename_or_file = filename_or_file.replace("\/", "_")
+    print(filename_or_file)
     if isinstance(filename_or_file, bytes):
         filename_or_file = str(bytes(filename_or_file).decode('utf-8', 'replace'))
     if isinstance(filename_or_file, str):
@@ -753,7 +755,7 @@ def Danmaku2ASS(input_files, input_format, output_file, stage_width, stage_heigh
             fo = sys.stdout
         ProcessComments(comments, fo, stage_width, stage_height, reserve_blank, font_face, font_size, text_opacity, duration_marquee, duration_still, filters_regex, is_reduce_comments, progress_callback)
     finally:
-        if output_file and fo != output_file:
+        if output_file and fo != None and fo != output_file:
             fo.close()
 
 

@@ -16,9 +16,10 @@ def getTitle(partPath):
 
 def formatTitle(partTitle):
     replaceDict = {" ": "", "①": "1", "②": "2", "③": "3", "④": "4", "⑤": "5", "⑥": "6",
-                    "&": "-", ".": "_", "（": "", "）": "", "(": "", ")": "", "-": ""}
-    [ partTitle.replace(key, value) for key,value in replaceDict.items() ]
-    print("partTitle:" + str(partTitle))
+                   "&": "-", ".": "_", "（": "", "）": "", "(": "", ")": "", "-": "", "/": "_"}
+    for key, value in replaceDict.items():
+        partTitle = partTitle.replace(key, value)
+    print("partTitle :" + str(partTitle))
     return partTitle
 
 def extracVideo(partPath, outputPath):
@@ -77,7 +78,7 @@ def extracVideo(partPath, outputPath):
     if os.path.exists(oldVideoPath):
         os.rename(oldVideoPath, newVideoPath)
     if os.path.exists(outputVideoPath):
-        print(str(outputVideoPath) + "extract done!")
+        print(str(outputVideoPath) + " extract done!")
         return
     print(outputVideoPath)
     # https://docs.python.org/3/library/subprocess.html
@@ -99,7 +100,7 @@ for videoPath in os.listdir(rootPath):
     if len(parts) < 1 :
         continue
     title = getTitle(videoPath / parts[0])
-    videoOutputPath = outputPath / title;
+    videoOutputPath = outputPath / str(title);
     if not os.path.exists(videoOutputPath):
         os.makedirs(videoOutputPath)
 
